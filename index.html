@@ -66,7 +66,7 @@
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(10px);
             animation: slideIn 0.8s ease-out;
-            overflow: hidden;
+            overflow-y: auto;
         }
 
         .slide-content::-webkit-scrollbar {
@@ -314,6 +314,71 @@
             background: #f8f9fa;
         }
 
+        .data-sources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+            width: 100%;
+        }
+
+        .source-card {
+            background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+            colour: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(162, 155, 254, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .source-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .source-card h4 {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .source-card p {
+            opacity: 0.95;
+            line-height: 1.3;
+            font-size: 0.85rem;
+            text-align: left;
+        }
+
+        .preprocessing-flow {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .process-step {
+            background: linear-gradient(135deg, #55a3ff, #003d82);
+            colour: white;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            min-width: 180px;
+            box-shadow: 0 8px 20px rgba(85, 163, 255, 0.3);
+        }
+
+        .process-step h4 {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .process-step p {
+            font-size: 0.75rem;
+            opacity: 0.9;
+            text-align: center;
+        }
+
         /* Navigation Controls */
         .nav-controls {
             position: fixed;
@@ -440,70 +505,6 @@
             break-inside: avoid;
         }
 
-        /* Compact styling for content-heavy slides */
-        .slide:nth-child(9) .chart-container.large,
-        .slide:nth-child(10) .chart-container.large {
-            height: 240px;
-            margin: 8px 0;
-        }
-
-        .slide:nth-child(9) .feature-table,
-        .slide:nth-child(10) .comparison-table {
-            font-size: 0.75rem;
-            margin: 8px 0;
-        }
-
-        .slide:nth-child(9) .feature-table th,
-        .slide:nth-child(9) .feature-table td,
-        .slide:nth-child(10) .comparison-table th,
-        .slide:nth-child(10) .comparison-table td {
-            padding: 6px;
-        }
-
-        .slide:nth-child(9) .insights-grid,
-        .slide:nth-child(10) .insights-grid {
-            margin: 8px 0;
-            gap: 10px;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        }
-
-        .slide:nth-child(9) .insight-card,
-        .slide:nth-child(10) .insight-card {
-            padding: 12px;
-        }
-
-        .slide:nth-child(9) .insight-card h4,
-        .slide:nth-child(10) .insight-card h4 {
-            font-size: 0.95rem;
-            margin-bottom: 6px;
-        }
-
-        .slide:nth-child(9) .insight-card p,
-        .slide:nth-child(10) .insight-card p {
-            font-size: 0.8rem;
-            line-height: 1.25;
-        }
-
-        .slide:nth-child(9) h2,
-        .slide:nth-child(10) h2 {
-            margin-bottom: 10px;
-            font-size: 1.7rem;
-        }
-
-        /* Extra compact on smaller viewports */
-        @media (max-height: 800px) {
-            .slide:nth-child(9) .chart-container.large,
-            .slide:nth-child(10) .chart-container.large {
-                height: 200px;
-            }
-            
-            .slide:nth-child(9) .insights-grid,
-            .slide:nth-child(10) .insights-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 8px;
-            }
-        }
-
         /* Result Color Coding */
         .result-excellent {
             background: linear-gradient(135deg, #00b894, #00a085);
@@ -535,6 +536,13 @@
             padding: 4px 10px;
             border-radius: 8px;
             font-weight: bold;
+        }
+
+        /* Compact styling for content-heavy slides */
+        .slide:nth-child(14) .chart-container.large,
+        .slide:nth-child(15) .chart-container.large {
+            height: 240px;
+            margin: 8px 0;
         }
 
         /* Responsive Design */
@@ -570,7 +578,7 @@
     <div class="presentation-container">
         <!-- Slide Number Indicator -->
         <div class="slide-number">
-            <span id="current-slide">1</span> / <span id="total-slides">14</span>
+            <span id="current-slide">1</span> / <span id="total-slides">19</span>
         </div>
 
         <!-- Slide 1: Title -->
@@ -587,35 +595,62 @@
             </div>
         </div>
 
-        <!-- Slide 2: Project Overview -->
+        <!-- Slide 2: Chapter 1 - Introduction -->
         <div class="slide">
             <div class="slide-content">
-                <h2>🎯 Project Overview</h2>
-                <p>Athana Data Science Services (ADSS) commissioned by the UK Department of Environment to develop machine learning models for predicting atmospheric emissions using the 2019 London Atmospheric Emissions Inventory (LAEI) dataset.</p>
+                <h2>📖 Chapter 1: Introduction</h2>
                 
-                <div class="data-summary">
-                    <h4>📊 LAEI 2019 Dataset Specifications</h4>
-                    <p>Comprehensive emissions data across London covering NOx, NO₂, PM₁₀, PM₂.₅, CO₂, SO₂, CH₄, and VOCs reported in tonnes/year by source type including transport, heating, industry, and aviation.</p>
-                </div>
-
                 <div class="insights-grid">
                     <div class="insight-card">
-                        <h4>📍 Geographical Coverage</h4>
-                        <p>79,388 road segments analysed across all London boroughs and areas within the M25. Emissions mapped on 1km grids with 20m geographical resolution concentration data.</p>
+                        <h4>🏢 Project Commission</h4>
+                        <p>Athana Data Science Services (ADSS) was commissioned by the UK Department of Environment to develop ML models predicting emissions using national monitoring data.</p>
                     </div>
                     <div class="insight-card">
-                        <h4>🔬 ML Methodology</h4>
-                        <p>Three complementary approaches: Ridge Regression for precision, Random Forest for feature analysis, K-means for geographical pattern discovery.</p>
+                        <h4>🎯 Research Focus</h4>
+                        <p>Group A will focus on modeling with the 2019 London Atmospheric Emissions Inventory (LAEI) dataset for comprehensive emission prediction.</p>
+                    </div>
+                </div>
+
+                <div class="data-summary">
+                    <h4>🔬 Research Methodology</h4>
+                    <p>Systematic approach combining data exploration, algorithm selection, predictive insight extraction, Python implementation, performance evaluation, and findings communication.</p>
+                </div>
+
+                <div class="preprocessing-flow">
+                    <div class="process-step">
+                        <h4>📊 Data Analysis</h4>
+                        <p>Selecting & Justifying ML Algorithms</p>
+                    </div>
+                    <div class="process-step">
+                        <h4>💡 Insight Extraction</h4>
+                        <p>Extracting Predictive Insights from Emissions Data</p>
+                    </div>
+                    <div class="process-step">
+                        <h4>🐍 Implementation</h4>
+                        <p>Implementing Models Using Python</p>
+                    </div>
+                    <div class="process-step">
+                        <h4>📈 Evaluation</h4>
+                        <p>Evaluate Model Performance Using Metrics</p>
+                    </div>
+                    <div class="process-step">
+                        <h4>📋 Communication</h4>
+                        <p>Communicate Findings & Forecasts</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 3: Dataset Characteristics -->
+        <!-- Slide 3: Chapter 2 - Data Exploration Overview -->
         <div class="slide">
             <div class="slide-content">
-                <h2>📊 Dataset Characteristics & Preprocessing</h2>
+                <h2>📊 Chapter 2: Data Exploration & Preprocessing</h2>
                 
+                <div class="data-summary">
+                    <h4>🗃️ LAEI 2019 Dataset Overview</h4>
+                    <p>Reports annual emissions (NOx, NO₂, PM₁₀, PM₂.₅, CO₂, SO₂, CH₄, VOCs) across London by source type. Includes traffic metrics (VKM, AADT), vehicle-specific emission splits, and pollutant concentrations at 20m resolution.</p>
+                </div>
+
                 <div class="metrics-grid">
                     <div class="metric-card">
                         <div class="metric-value">143,976</div>
@@ -626,33 +661,187 @@
                         <div class="metric-label">Road Segments</div>
                     </div>
                     <div class="metric-card">
-                        <div class="metric-value">23</div>
-                        <div class="metric-label">Vehicle-Specific Variables</div>
+                        <div class="metric-value">All M25</div>
+                        <div class="metric-label">London Coverage</div>
                     </div>
                     <div class="metric-card">
                         <div class="metric-value">20m</div>
-                        <div class="metric-label">Geographical Resolution</div>
+                        <div class="metric-label">Spatial Resolution</div>
                     </div>
                 </div>
 
                 <div class="insights-grid">
                     <div class="insight-card">
-                        <h4>🔧 Data Preprocessing</h4>
-                        <p>StandardScaler normalisation, missing value imputation using geographical interpolation, and PCA for dimensionality reduction applied across all models.</p>
+                        <h4>🌍 Spatial Coverage</h4>
+                        <p>All London boroughs within the M25, with emissions mapped at 1km grid and concentrations at 20m resolution. Borough summaries and dashboards aid policy analysis.</p>
                     </div>
                     <div class="insight-card">
-                        <h4>📈 Traffic Metrics</h4>
-                        <p>Vehicle Kilometres (VKM), Annual Average Daily Traffic (AADT), and emission splits by vehicle type including exhaust and brake wear sources.</p>
-                    </div>
-                    <div class="insight-card">
-                        <h4>🎯 Target Variables</h4>
-                        <p>Focus on NOx emissions prediction with comprehensive analysis of PM₁₀, PM₂.₅, and CO₂ patterns across London's transport network.</p>
+                        <h4>⚠️ Key Data Challenges</h4>
+                        <p>Missing data mainly in concentrations from sensor gaps. Files (CSV, Excel, GIS) have inconsistent columns, and multi-source fields need parsing or aggregation.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Slide 4: Vehicle Type Emissions -->
+        <!-- Slide 4: Data Sources & Summaries -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>🗂️ Data Sources & Analysis Summaries</h2>
+                
+                <div class="data-sources-grid">
+                    <div class="source-card">
+                        <h4>🛣️ Major Roads Link Emissions</h4>
+                        <p>Link-level emissions (NOx, PM₁₀, PM₂.₅, CO₂) by vehicle type for major London roads across 2019, 2025, and 2030. Enables Linear Regression and Random Forest analysis for identifying top emission hotspots.</p>
+                    </div>
+                    <div class="source-card">
+                        <h4>🗺️ Concentration Maps (20m)</h4>
+                        <p>Five CSV files providing 20m-resolution estimates of NO₂, NOx, PM₁₀, and PM₂.₅ concentrations across Greater London. Support pollution mapping, exposure analysis, and spatial machine learning applications.</p>
+                    </div>
+                    <div class="source-card">
+                        <h4>📈 Emissions Summary & Forecast</h4>
+                        <p>Tracks NOx, PM, and CO₂ emissions (2013–2030), highlighting transport and heating as key sources. Forecasts NOx cuts via cleaner technology for temporal modeling and trend analysis.</p>
+                    </div>
+                    <div class="source-card">
+                        <h4>🏘️ Minor Roads Grid (1km²)</h4>
+                        <p>Maps NOₓ, PM₁₀, PM₂.₅, and CO₂ by vehicle type at 1km² resolution, focusing on residential pollution analysis. Enables clustering and feature analysis for spatial patterns.</p>
+                    </div>
+                    <div class="source-card">
+                        <h4>🚦 Traffic Flow & Speed Data</h4>
+                        <p>Maps traffic flow and speed on major London roads using TOIDs, with vehicle-specific metrics. Enables clustering, regression, and dimensionality reduction for traffic-emission modeling.</p>
+                    </div>
+                </div>
+
+                <p style="font-size: 1rem; color: #666; margin-top: 20px; text-align: center;">
+                    <strong>Combined Analysis:</strong> These five datasets enable comprehensive machine learning approaches including regression, clustering, classification, and spatial-temporal modeling with PCA for dimensionality reduction.
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 5: Preprocessing Pipeline -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>🔧 Preprocessing Pipeline</h2>
+                
+                <div class="preprocessing-flow">
+                    <div class="process-step">
+                        <h4>🔍 Missing Data</h4>
+                        <p>Drop or impute missing values; use spatial interpolation for grid gaps</p>
+                    </div>
+                    <div class="process-step">
+                        <h4>⚙️ Feature Engineering</h4>
+                        <p>Encode categorical variables; aggregate emissions; create interaction terms; apply PCA</p>
+                    </div>
+                    <div class="process-step">
+                        <h4>📏 Scaling</h4>
+                        <p>Min-Max for KNN, Standard for regression, Robust for outliers</p>
+                    </div>
+                    <div class="process-step">
+                        <h4>🎯 Partitioning</h4>
+                        <p>Train/test split or K-Fold CV; spatial CV for geospatial models</p>
+                    </div>
+                </div>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Processing Step</th>
+                            <th>Method</th>
+                            <th>Purpose</th>
+                            <th>Reference</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Missing Data Handling</td>
+                            <td>Spatial interpolation</td>
+                            <td>Fill sensor gaps in grid data</td>
+                            <td>Myers, D. (1994)</td>
+                        </tr>
+                        <tr>
+                            <td>Feature Engineering</td>
+                            <td>PCA, categorical encoding</td>
+                            <td>Dimensionality reduction, variable encoding</td>
+                            <td>Dong et al. (2018)</td>
+                        </tr>
+                        <tr>
+                            <td>Outlier Detection</td>
+                            <td>Robust scaling methods</td>
+                            <td>Handle extreme emission values</td>
+                            <td>Tabatabaei et al. (2021)</td>
+                        </tr>
+                        <tr>
+                            <td>Spatial Validation</td>
+                            <td>Spatial cross-validation</td>
+                            <td>Evaluate geospatial model performance</td>
+                            <td>Wang et al. (2023)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="insights-grid">
+                    <div class="insight-card">
+                        <h4>🎛️ Algorithm-Specific Scaling</h4>
+                        <p>Different algorithms require different preprocessing: Min-Max scaling for KNN distance calculations, StandardScaler for regression coefficients, and Robust scaling for outlier-resistant modeling.</p>
+                    </div>
+                    <div class="insight-card">
+                        <h4>🗺️ Spatial Considerations</h4>
+                        <p>Geospatial models require specialized cross-validation to account for spatial autocorrelation, ensuring model performance reflects real-world geographic patterns.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Expected Predictive Insights -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>🔮 Expected Predictive Insights</h2>
+                
+                <p style="font-size: 1.1rem; color: #666; margin-bottom: 20px; text-align: center;">
+                    Variable importance highlights vehicle type, pollutants, traffic metrics, and location as key emission drivers.
+                </p>
+
+                <div class="insights-grid">
+                    <div class="insight-card">
+                        <h4>🚗 Vehicle Impact Analysis</h4>
+                        <p>Estimate emissions by vehicle type to prioritize electrification and regulation policies for maximum environmental impact.</p>
+                    </div>
+                    <div class="insight-card">
+                        <h4>🎯 Emission Hotspot Classification</h4>
+                        <p>Classify high-pollution zones to target clean air zones and mitigation efforts in the most problematic areas.</p>
+                    </div>
+                    <div class="insight-card">
+                        <h4>🏙️ Borough-Level Forecasting</h4>
+                        <p>Predict future emissions per borough to track progress toward reduction targets and guide local policy decisions.</p>
+                    </div>
+                    <div class="insight-card">
+                        <h4>👥 Population Exposure Risk</h4>
+                        <p>Predict population affected by pollution to guide public health and zoning policies for vulnerable communities.</p>
+                    </div>
+                    <div class="insight-card">
+                        <h4>🚦 Traffic-Emission Modeling</h4>
+                        <p>Model emissions from traffic flow and speed data to support congestion and speed management strategies.</p>
+                    </div>
+                    <div class="insight-card">
+                        <h4>🗺️ Spatial Pattern Discovery</h4>
+                        <p>Group areas by pollution patterns to enable regional planning and targeted zoning interventions.</p>
+                    </div>
+                    <div class="insight-card">
+                        <h4>📈 Temporal Trend Analysis</h4>
+                        <p>Forecast pollutant levels over time to simulate policy impact and predict future air quality scenarios.</p>
+                    </div>
+                    <div class="insight-card">
+                        <h4>⭐ Feature Importance Ranking</h4>
+                        <p>Identify key pollution drivers using Random Forest and XGBoost to focus interventions on major contributors.</p>
+                    </div>
+                </div>
+
+                <p style="font-size: 1rem; color: #666; margin-top: 20px; text-align: center; font-style: italic;">
+                    These insights enable data-driven environmental policy decisions through comprehensive ML analysis of London's emission patterns.
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 7: Vehicle Type Emissions -->
         <div class="slide">
             <div class="slide-content">
                 <h2>🚗 Vehicle Type Emission Profiles</h2>
@@ -674,7 +863,7 @@
             </div>
         </div>
 
-        <!-- Slide 5: Ridge Regression Results -->
+        <!-- Slide 8: Ridge Regression Results -->
         <div class="slide">
             <div class="slide-content">
                 <h2>📈 Ridge Regression: Exceptional Accuracy</h2>
@@ -744,7 +933,7 @@
             </div>
         </div>
 
-        <!-- Slide 6: Ridge Regression Feature Analysis -->
+        <!-- Slide 9: Ridge Regression Feature Analysis -->
         <div class="slide">
             <div class="slide-content">
                 <h2>🔍 Ridge Regression: Feature Coefficients Analysis</h2>
@@ -815,7 +1004,7 @@
             </div>
         </div>
 
-        <!-- Slide 7: Random Forest Results -->
+        <!-- Slide 10: Random Forest Results -->
         <div class="slide">
             <div class="slide-content">
                 <h2>🌳 Random Forest: Complex Pattern Recognition</h2>
@@ -880,7 +1069,7 @@
             </div>
         </div>
 
-        <!-- Slide 8: Random Forest Feature Importance -->
+        <!-- Slide 11: Random Forest Feature Importance -->
         <div class="slide">
             <div class="slide-content">
                 <h2>📊 Random Forest: Feature Importance Rankings</h2>
@@ -951,7 +1140,7 @@
             </div>
         </div>
 
-        <!-- Slide 9: Borough Rankings -->
+        <!-- Slide 12: Borough Rankings -->
         <div class="slide">
             <div class="slide-content">
                 <h2>🏙️ London Borough Emission Rankings</h2>
@@ -1028,7 +1217,7 @@
             </div>
         </div>
 
-        <!-- Slide 10: K-means Clustering Results -->
+        <!-- Slide 13: K-means Clustering Results -->
         <div class="slide">
             <div class="slide-content">
                 <h2>🗺️ K-means Clustering: Geographical Emission Patterns</h2>
@@ -1071,7 +1260,7 @@
             </div>
         </div>
 
-        <!-- Slide 11: Model Comparison -->
+        <!-- Slide 14: Model Comparison -->
         <div class="slide">
             <div class="slide-content">
                 <h2>⚖️ Comprehensive Model Performance Comparison</h2>
@@ -1128,7 +1317,7 @@
             </div>
         </div>
 
-        <!-- Slide 12: Key Research Findings -->
+        <!-- Slide 15: Key Research Findings -->
         <div class="slide">
             <div class="slide-content">
                 <h2>🔬 Key Research Findings</h2>
@@ -1162,7 +1351,7 @@
             </div>
         </div>
 
-        <!-- Slide 13: Conclusion -->
+        <!-- Slide 16: Conclusion -->
         <div class="slide">
             <div class="slide-content">
                 <h1>🎯 Research Conclusions</h1>
@@ -1209,7 +1398,7 @@
             </div>
         </div>
 
-        <!-- Slide 14: References -->
+        <!-- Slide 17: References -->
         <div class="slide">
             <div class="slide-content">
                 <h2>📚 References</h2>
@@ -1226,17 +1415,17 @@
                     
                     <p>Inglis, A. Parnell, A & Hurley, C. (2022). Visualizing Variable Importance and Variable Interaction Effects in Machine Learning Models. Journal of Computational and Graphical Statistics. 31(3), pp.766 - 778.</p>
                     
-                    <p>Kanevski, M. Timonin, V & Pozdnukhov, A. (2009). Machine Learning for Geographical Environmental Data: Theory, Applications and Software. Lausanne: EPFL Press. pp.1 - 30.</p>
+                    <p>Kanevski, M. Timonin, V & Pozdnukhov, A. (2009). Machine Learning for Spatial Environmental Data: Theory, Applications and Software. Lausanne: EPFL Press. pp.1 - 30.</p>
                     
                     <p>Montgomery, D. Peck, E & Vining, G. (2021). Introduction to Linear Regression Analysis. 6th ed. New York City: John Wiley & Sons. pp.1 - 11.</p>
                     
-                    <p>Myers, D. (1994). Geographical interpolation: an overview. Geoderma. 62(1 - 3), pp.17 - 28.</p>
+                    <p>Myers, D. (1994). Spatial interpolation: an overview. Geoderma. 62(1 - 3), pp.17 - 28.</p>
                     
                     <p>Palei, S. Lenka, R. Jain, P & Saxena, S. (2025). Artificial Intelligence in e-Health Framework. AI, Classification, Wearable Devices, and Computer-Aided Diagnosis. 1(1), pp.23 - 62.</p>
                     
-                    <p>Tabatabaei, M. Kimiaefar, R. Hajian, A & Akbari, A. (2021). Robust outlier detection in geo-Geographical data based on LOLIMOT and KNN search. Earth Science Informatics. 14 (1), pp.1065 - 1072.</p>
+                    <p>Tabatabaei, M. Kimiaefar, R. Hajian, A & Akbari, A. (2021). Robust outlier detection in geo-spatial data based on LOLIMOT and KNN search. Earth Science Informatics. 14 (1), pp.1065 - 1072.</p>
                     
-                    <p>Wang, Y. Khodadadzadeh, M & Zurita-Milla, R. (2023). Geographical+: A new cross-validation method to evaluate geoGeographical machine learning models. International Journal of Applied Earth Observation and Geoinformation. 121 (1), pp.1 - 9.</p>
+                    <p>Wang, Y. Khodadadzadeh, M & Zurita-Milla, R. (2023). Spatial+: A new cross-validation method to evaluate geospatial machine learning models. International Journal of Applied Earth Observation and Geoinformation. 121 (1), pp.1 - 9.</p>
                     
                     <p>Wena, Y. Wua, R. Zhouc, Z. Zhanga, S. Yanga, S. Wallingtond, T. Shene, W. Tanc, Q. Dengc, Y & Wua, Y. (2022). A data-driven method of traffic emissions mapping with land use random forest models. Applied Energy. 305 (1), pp.1 - 10.</p>
                     
@@ -1265,6 +1454,9 @@
             <div class="indicator" onclick="goToSlide(11)"></div>
             <div class="indicator" onclick="goToSlide(12)"></div>
             <div class="indicator" onclick="goToSlide(13)"></div>
+            <div class="indicator" onclick="goToSlide(14)"></div>
+            <div class="indicator" onclick="goToSlide(15)"></div>
+            <div class="indicator" onclick="goToSlide(16)"></div>
         </div>
         
         <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Next →</button>
@@ -1338,8 +1530,8 @@
         let chartsInitialized = {};
 
         function initChartsForSlide(slideIndex) {
-            // Vehicle Emissions Chart (Slide 3)
-            if (slideIndex === 3 && !chartsInitialized.vehicleEmissions) {
+            // Vehicle Emissions Chart (Slide 6)
+            if (slideIndex === 6 && !chartsInitialized.vehicleEmissions) {
                 const vehicleCtx = document.getElementById('vehicleEmissionsChart').getContext('2d');
                 new Chart(vehicleCtx, {
                     type: 'bar',
@@ -1382,8 +1574,8 @@
                 chartsInitialized.vehicleEmissions = true;
             }
 
-            // Ridge Regression Chart (Slide 5)
-            if (slideIndex === 5 && !chartsInitialized.ridge) {
+            // Ridge Regression Chart (Slide 8)
+            if (slideIndex === 8 && !chartsInitialized.ridge) {
                 const ridgeCtx = document.getElementById('ridgeFeatureChart').getContext('2d');
                 new Chart(ridgeCtx, {
                     type: 'bar',
@@ -1424,8 +1616,8 @@
                 chartsInitialized.ridge = true;
             }
 
-            // Random Forest Chart (Slide 7)
-            if (slideIndex === 7 && !chartsInitialized.forest) {
+            // Random Forest Chart (Slide 10)
+            if (slideIndex === 10 && !chartsInitialized.forest) {
                 const forestCtx = document.getElementById('forestImportanceChart').getContext('2d');
                 new Chart(forestCtx, {
                     type: 'doughnut',
@@ -1464,8 +1656,8 @@
                 chartsInitialized.forest = true;
             }
 
-            // Borough Rankings Chart (Slide 8)
-            if (slideIndex === 8 && !chartsInitialized.borough) {
+            // Borough Rankings Chart (Slide 11)
+            if (slideIndex === 11 && !chartsInitialized.borough) {
                 const boroughCtx = document.getElementById('boroughRankingsChart').getContext('2d');
                 new Chart(boroughCtx, {
                     type: 'bar',
@@ -1520,8 +1712,8 @@
                 chartsInitialized.borough = true;
             }
 
-            // Cluster Distribution Chart (Slide 9)
-            if (slideIndex === 9 && !chartsInitialized.cluster) {
+            // Cluster Distribution Chart (Slide 12)
+            if (slideIndex === 12 && !chartsInitialized.cluster) {
                 const clusterCtx = document.getElementById('clusterDistributionChart').getContext('2d');
                 new Chart(clusterCtx, {
                     type: 'bar',
@@ -1565,8 +1757,8 @@
                 chartsInitialized.cluster = true;
             }
 
-            // Performance Comparison Chart (Slide 10)
-            if (slideIndex === 10 && !chartsInitialized.comparison) {
+            // Performance Comparison Chart (Slide 13)
+            if (slideIndex === 13 && !chartsInitialized.comparison) {
                 const comparisonCtx = document.getElementById('performanceComparisonChart').getContext('2d');
                 new Chart(comparisonCtx, {
                     type: 'radar',
