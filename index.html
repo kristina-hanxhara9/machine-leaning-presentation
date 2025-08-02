@@ -36,7 +36,7 @@
             align-items: centre;
             opacity: 0;
             transform: translateX(100%);
-            transition: all 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
         }
@@ -336,7 +336,7 @@
             font-size: 0.9rem;
             font-weight: 600;
             box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             backdrop-filter: blur(10px);
         }
 
@@ -438,6 +438,70 @@
             margin-bottom: 10px;
             text-align: left;
             break-inside: avoid;
+        }
+
+        /* Compact styling for content-heavy slides */
+        .slide:nth-child(9) .chart-container.large,
+        .slide:nth-child(10) .chart-container.large {
+            height: 240px;
+            margin: 8px 0;
+        }
+
+        .slide:nth-child(9) .feature-table,
+        .slide:nth-child(10) .comparison-table {
+            font-size: 0.75rem;
+            margin: 8px 0;
+        }
+
+        .slide:nth-child(9) .feature-table th,
+        .slide:nth-child(9) .feature-table td,
+        .slide:nth-child(10) .comparison-table th,
+        .slide:nth-child(10) .comparison-table td {
+            padding: 6px;
+        }
+
+        .slide:nth-child(9) .insights-grid,
+        .slide:nth-child(10) .insights-grid {
+            margin: 8px 0;
+            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        }
+
+        .slide:nth-child(9) .insight-card,
+        .slide:nth-child(10) .insight-card {
+            padding: 12px;
+        }
+
+        .slide:nth-child(9) .insight-card h4,
+        .slide:nth-child(10) .insight-card h4 {
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+        }
+
+        .slide:nth-child(9) .insight-card p,
+        .slide:nth-child(10) .insight-card p {
+            font-size: 0.8rem;
+            line-height: 1.25;
+        }
+
+        .slide:nth-child(9) h2,
+        .slide:nth-child(10) h2 {
+            margin-bottom: 10px;
+            font-size: 1.7rem;
+        }
+
+        /* Extra compact on smaller viewports */
+        @media (max-height: 800px) {
+            .slide:nth-child(9) .chart-container.large,
+            .slide:nth-child(10) .chart-container.large {
+                height: 200px;
+            }
+            
+            .slide:nth-child(9) .insights-grid,
+            .slide:nth-child(10) .insights-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
         }
 
         /* Result Color Coding */
@@ -1238,7 +1302,7 @@
             // Initialize charts when they become visible
             setTimeout(() => {
                 initChartsForSlide(currentSlide);
-            }, 300);
+            }, 500);
         }
 
         function changeSlide(direction) {
@@ -1377,7 +1441,7 @@
                                 '#1abc9c',
                                 '#95a5a6'
                             ],
-                            borderWidth: 4,
+                            borderWidth: 3,
                             borderColor: '#fff'
                         }]
                     },
@@ -1388,9 +1452,12 @@
                             title: {
                                 display: true,
                                 text: 'Random Forest Feature Importance Distribution',
-                                font: { size: 16, weight: 'bold' }
+                                font: { size: 14, weight: 'bold' }
                             },
-                            legend: { position: 'right' }
+                            legend: { 
+                                position: 'right',
+                                labels: { font: { size: 11 } }
+                            }
                         }
                     }
                 });
@@ -1428,13 +1495,24 @@
                             title: {
                                 display: true,
                                 text: 'Top 5 London Boroughs - Emission Rankings',
-                                font: { size: 16, weight: 'bold' }
+                                font: { size: 14, weight: 'bold' }
+                            },
+                            legend: { 
+                                labels: { font: { size: 11 } }
                             }
                         },
                         scales: {
                             y: {
                                 beginAtZero: true,
-                                title: { display: true, text: 'Emissions' }
+                                title: { 
+                                    display: true, 
+                                    text: 'Emissions',
+                                    font: { size: 11 }
+                                },
+                                ticks: { font: { size: 10 } }
+                            },
+                            x: {
+                                ticks: { font: { size: 10 } }
                             }
                         }
                     }
@@ -1463,7 +1541,7 @@
                             title: {
                                 display: true,
                                 text: 'London Road Network - Emission Cluster Distribution',
-                                font: { size: 16, weight: 'bold' }
+                                font: { size: 14, weight: 'bold' }
                             },
                             legend: { display: false }
                         },
@@ -1471,7 +1549,15 @@
                             y: {
                                 beginAtZero: true,
                                 max: 50,
-                                title: { display: true, text: 'Percentage of Roads (%)' }
+                                title: { 
+                                    display: true, 
+                                    text: 'Percentage of Roads (%)',
+                                    font: { size: 11 }
+                                },
+                                ticks: { font: { size: 10 } }
+                            },
+                            x: {
+                                ticks: { font: { size: 9 } }
                             }
                         }
                     }
